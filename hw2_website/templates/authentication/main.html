@@ -14,9 +14,9 @@
         /* margin: 20px; */
     }
 
-    /* body{
-        margin: 10px;
-    } */
+    body{
+        background: #e3edf7;
+    }
 
     .header-box{
         width: auto;
@@ -26,7 +26,7 @@
         padding-top: 19px;
         padding-left: 10px;
         color: #CBE4DE;
-        font-family:Arial, Helvetica, sans-serif;
+        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         font-weight: bold;
         justify-content: space-between;
         display: flex;
@@ -42,16 +42,84 @@
 
     }
     
-    .sign-out-btn{
+    #btn{
         margin-top: -7px;
         margin-bottom: 2px;
         margin-right: 8px;
         background-color: #0E8388;
         font-weight: 500;
         color: white;
-        font-family: 'Courier New', Courier, monospace;
+        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
-    
+
+    .accordian{
+        margin: 60px auto;
+        width: 600px;
+        align-items: center;
+    }
+
+    .accordian li{
+        list-style: none;
+        width: 100%;
+        margin: 20px;
+        padding: 10px;
+        border-radius: 8px;
+        background: #2C3333;
+        box-shadow: 6px 6px 10px -1px rgba(0,0,0,0.15),
+        -6px -6px 10px -1px rgba(255,255,255,0.7);
+        
+    }
+
+    .accordian li label{
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        font-size: 10px;
+        font-weight: 500;
+        cursor: pointer;
+    }
+
+    label::before{
+        content: '+';
+        margin-right: 10px;
+        font-size: 24px;
+        font-weight: 600;
+    }
+
+    input[type = 'checkbox']{
+        display: none;
+    }
+
+    .accordian .content{
+        color: #CBE4DE;
+        padding: 0 10px;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s, padding 0.5s;
+    }
+
+    .accordian input[type = 'checkbox']:checked + label + .content{
+        max-height: 400px;
+        padding: 10px 10px 20px;
+    }
+
+    .accordian input[type = 'checkbox']:not(:checked) + label + .content{
+        max-height: 0;
+        padding: 0 10px;
+    }
+
+    .accordian input[type = 'checkbox']:checked + label::before{
+        content: '-';
+        color: #CBE4DE;
+    } 
+ 
+    label{
+        color: #CBE4DE;
+        font-size: 20px;
+    }
+    .input-heading{
+        margin-top: 10px;
+    }
 
 </style>
 
@@ -59,7 +127,7 @@
 
     <div class = 'header-box'>
         <h5>PORTFOLIO MANAGER</h5>
-        <button class = 'sign-out-btn'>Sign Out</button>
+        <button class="btn btn-info" id = 'btn'>Sign Out</button>
     </div>
 
     <div class = 'user-data'>
@@ -67,13 +135,38 @@
         {% if user.is_authenticated %}
             
             <div class = 'name-display'>
-                <h4>Hello Muhammad Murtaza !</h4>    
+                <h4>Hello {{fname}} !</h4>    
             </div> 
             
         {%endif%}
-
     </div>
+
+    <ul class = 'accordian'>
+        <li>
+            <!-- <input type = 'radio' name = 'accordian' id = 'first' unchecked> -->
+            <input type = 'checkbox' name = 'accordian' id = 'first' unchecked>
+            <label for = 'first'><h6 class = 'input-heading'>Add Portfolio Project</h6></label>
+            <div class = 'content'>
+                <form action = '/main' method = 'post' enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type = 'text' id = 'project-name' name = 'project-name' class="form-control" placeholder="Project Name">
+                    <br>
+                    <textarea name="description" id = "description" rows="5" cols="60" wrap="soft" placeholder="Description" class="form-control"></textarea>
+                    <!-- <input type = 'text' id = 'description' name = 'description' placeholder="Description" size = '50' style = 'height: 200px; padding:5px; padding-top:10px; overflow-wrap: break-word;'> -->
+                    <br>
+                    <h5 style = 'font-size: 15px;'>Submit any media file related to your project</h5>
+                    <input type = 'file' name = 'media-file' id = 'media-file' class = 'btn btn-info'>
+                    <br><br>
+                    <button type="submit" class="btn btn-info">Submit</button>
+                    <br>
+
+                </form>
+            </div>
+        </li>
+
+    </ul>
 
 
 </body>
+
 </html>

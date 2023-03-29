@@ -37,7 +37,6 @@ def signUp(request):
 
     return render(request,'authentication/signUp.html')
 
-
 def signIn(request):
 
     if request.method == 'POST':
@@ -67,8 +66,21 @@ def signIn(request):
 # def projects_list(request):
 #     c
 
-def signout(request):
+def signOut(request):
     pass
 
 def main(request):
+
+    if request.method == 'POST':
+        project_name = request.POST['project-name']
+        description = request.POST['description']
+        media = request.FILES['media-file']
+
+        newProject =  Project(user = request.user, title = project_name, description = description, media = media)
+        newProject.save()
+
+    user = request.user
+    projects = Project.objects.filter(user=user)
+    return render(request, 'authentication/main.html', {'fname':user.first_name,'object_list': projects})
+        
     return render(request,'authentication/main.html')
