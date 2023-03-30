@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<!-- <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,9 +16,8 @@
     {%endfor%}
     <br>
     <h2>Sign Up</h2>
-    <!-- <br> -->
     <h2>For</h2>
-    <!-- <br> -->
+    
     <h2>Portfolio Website</h2>
     <br>
     <form action = '/signUp' method = 'post'>
@@ -35,5 +34,35 @@
         <button class = 'btn btn-secondary'>Sign Up</button>
     </form>
 </center>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+<head>
+	{%load static%}
+	<link rel="stylesheet" href="{% static 'signUp.css' %}">
+	<title>Sign Up Page</title>
+	
+</head>
+<body>
+	
+	<div class="container">
+		<h1>Sign Up</h1>
+		<form action = '/signUp' method = 'post'>
+            {% csrf_token %}
+			<label for="fname">Name:</label>
+            <input type = 'text' id = 'fname' name = 'fname' placeholder = 'Your name' required>
+
+			<label for="email">Email:</label>
+            <input type = 'text' id = 'email' name = 'email' placeholder="Create a email" required>
+
+			<label for="password">Password:</label>
+            <input type = 'text' id = 'password' name = 'password' placeholder="Enter a password" required>
+
+			<button type="submit">Sign Up</button>
+		</form>
+	</div>
+
 </body>
 </html>

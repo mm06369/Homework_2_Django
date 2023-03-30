@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.views.generic.list import ListView
 from .models import Project
 # Create your views here.
@@ -50,7 +50,7 @@ def signIn(request):
             # return render(request, 'authentication/main.html',{'fname':fname})
             # return redirect('projectList')
             projects = Project.objects.filter(user=user)
-            return render(request, 'authentication/main.html', {'fname':fname,'object_list': projects})
+            return render(request, 'authentication/main.html', {'fname':fname,'object_list': projects, 'show':True})
         else:
             messages.error(request, 'Bad Credentials')
             return redirect('home')
@@ -67,8 +67,15 @@ def signIn(request):
 #     c
 
 def signOut(request):
-    pass
-
+    try:
+        logout(request)
+        return redirect('home')
+    except:
+        messages.error(request, 'Error Signing out')
+        user = request.user
+        projects = Project.objects.filter(user=user)
+        return render(request, 'authentication/main.html', {'fname':user.first_name,'object_list': projects})
+    
 def main(request):
 
     if request.method == 'POST':
@@ -81,6 +88,9 @@ def main(request):
 
     user = request.user
     projects = Project.objects.filter(user=user)
-    return render(request, 'authentication/main.html', {'fname':user.first_name,'object_list': projects})
+    return render(request, 'authentication/main.html', {'fname':user.first_name,'object_list': projects, 'show':True})
         
-    return render(request,'authentication/main.html')
+
+def guestSignIn(request):
+    projects = Project.objects.filter()
+    return render(request, 'authentication/main.html', {'fname':'Guest User','object_list': projects, 'show':False})

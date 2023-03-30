@@ -1,0 +1,138 @@
+.user-data{
+    font-family: 'sans-serif';
+    margin-top: 30px;
+    /* margin: 20px; */
+}
+
+body{
+    background: #e3edf7;
+}
+
+.header-box{
+    width: auto;
+    height: 60px;
+    background-color: #2C3333;
+    text-align: left;
+    padding-top: 19px;
+    padding-left: 10px;
+    color: #CBE4DE;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    justify-content: space-between;
+    display: flex;
+    padding-right: 5px;
+    padding-bottom: 8px;
+}
+
+.name-display h4{
+    font-weight: bold;
+    font-size: 20px;
+    margin: 10px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+
+}
+
+#btn{
+    margin-top: -7px;
+    margin-bottom: 2px;
+    margin-right: 8px;
+    background-color: #0E8388;
+    font-weight: 500;
+    color: white;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-decoration: none;
+}
+
+.accordian{
+    margin: 60px auto;
+    width: 600px;
+    align-items: center;
+    /* margin-right: 20px; */
+}
+
+.accordian li{
+    list-style: none;
+    width: 100%;
+    margin: 20px;
+    padding: 10px;
+    border-radius: 8px;
+    background: #2C3333;
+    box-shadow: 6px 6px 10px -1px rgba(0,0,0,0.15),
+    -6px -6px 10px -1px rgba(255,255,255,0.7);
+    
+}
+
+.accordian li label{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    font-size: 10px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+label::before{
+    content: '+';
+    margin-right: 10px;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+input[type = 'checkbox']{
+    display: none;
+}
+
+.accordian .content{
+    color: #CBE4DE;
+    padding: 0 10px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s, padding 0.5s;
+}
+
+.accordian #first:checked + label + .content{
+    max-height: 400px;
+    padding: 10px 10px 20px;
+}
+
+.accordian #first:not(:checked) + label + .content{
+    max-height: 0;
+    padding: 0 10px;
+}
+
+.accordian #first:checked + label::before{
+    content: '-';
+    color: #CBE4DE;
+} 
+.accordian input[type = 'radio']:checked + label + .content{
+    max-height: 700px;
+    padding: 10px 10px 20px;
+}
+
+.accordian input[type = 'radio']:not(:checked) + label + .content{
+    max-height: 0;
+    padding: 0 10px;
+}
+
+.accordian input[type = 'radio']:checked + label::before{
+    content: '-';
+    color: #CBE4DE;
+} 
+
+
+label{
+    color: #CBE4DE;
+    font-size: 20px;
+}
+.input-heading{
+    margin-top: 10px;
+}
+
+.btn-text{
+    text-decoration: none;
+    color: inherit;
+}
+.proj-heading{
+    text-align: center;
+}
